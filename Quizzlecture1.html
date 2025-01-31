@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lean Six Sigma Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .quiz-container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        .question { font-size: 20px; }
+        .options { margin: 10px 0; }
+        button { padding: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>Lean Six Sigma Quiz</h2>
+        <p id="question" class="question"></p>
+        <div id="options" class="options"></div>
+        <button onclick="nextQuestion()">Next</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "What is the primary goal of Lean Six Sigma?", options: ["Increase waste", "Reduce defects", "Lower profits", "Slow production"], answer: "Reduce defects" },
+            { question: "Which company pioneered Lean Thinking?", options: ["Ford", "Toyota", "General Electric", "Tesla"], answer: "Toyota" },
+            { question: "What does Six Sigma focus on reducing?", options: ["Costs", "Variation", "Speed", "Employees"], answer: "Variation" },
+            { question: "Which metric is used in Lean to measure process efficiency?", options: ["Overall Equipment Effectiveness (OEE)", "Return on Investment (ROI)", "Market Share", "Customer Satisfaction"], answer: "Overall Equipment Effectiveness (OEE)" },
+            { question: "What is the main purpose of Value Stream Mapping?", options: ["Track financial gains", "Identify waste", "Measure defects", "Increase costs"], answer: "Identify waste" },
+            { question: "Which tool is commonly used in Six Sigma for problem-solving?", options: ["Fishbone Diagram", "Gantt Chart", "Flowchart", "Balance Sheet"], answer: "Fishbone Diagram" },
+            { question: "What are the five Lean principles?", options: ["Define, Measure, Analyze, Improve, Control", "Identify Value, Map Value Stream, Create Flow, Establish Pull, Pursue Perfection", "Plan, Do, Check, Act", "Reduce, Reuse, Recycle"], answer: "Identify Value, Map Value Stream, Create Flow, Establish Pull, Pursue Perfection" },
+            { question: "What is 'Kaizen' in Lean Six Sigma?", options: ["Continuous improvement", "Waste removal", "Machine efficiency", "Customer engagement"], answer: "Continuous improvement" },
+            { question: "Which company is famous for implementing Six Sigma in the 1990s?", options: ["Google", "General Electric", "Microsoft", "Amazon"], answer: "General Electric" },
+            { question: "What is the ideal Six Sigma level of defects per million opportunities (DPMO)?", options: ["3.4", "10", "50", "100"], answer: "3.4" }
+        ];
+        let currentQuestion = 0, score = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById("question").textContent = q.question;
+            document.getElementById("options").innerHTML = q.options.map(opt => 
+                `<button onclick="checkAnswer('${opt}')">${opt}</button>`
+            ).join(" ");
+        }
+
+        function checkAnswer(answer) {
+            if (answer === questions[currentQuestion].answer) {
+                score++;
+            }
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                document.getElementById("result").textContent = `You scored ${score} out of ${questions.length}`;
+                document.getElementById("options").innerHTML = "";
+            }
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
